@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h2>Chat</h2>
+    <div id="chat-box"></div>
+    <input type="text" id="message" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        let receiverId = "receiver_user_id"; // Set dynamically
+
+        function loadMessages() {
+            axios.get(`/get_messages/${receiverId}`)
+                .then(response => {
+                    let messages = response.data;
+                    let chatBox = document.getElementById("chat-box");
+                    chatBox.innerHTML = "";
+                    messages.forEach(msg => {
+                        chatBox.innerHTML += `<p><strong>${msg.sender_id}:</strong> ${msg.message}</p>`;
+                    });
+                });
+        }
+
+        function sendMessage() {
+            let message = document.getElementById("message").value;
+            axios.post('/send_message', {
+                receiver_id: receiverId,
+                message: message
+            }).then(() => {
+                document.getElementById("message").value = "";
+                loadMessages();
+            });
+        }
+
+        setInterval(loadMessages, 2000); // Refresh messages every 2 seconds
+    </script>
+</body>
+</html>

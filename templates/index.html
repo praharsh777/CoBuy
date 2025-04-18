@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup</title>
+    <style>
+       /* Navigation Bar */
+        #headers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #6d6875; /* Amazon-like dark blue */
+            opacity: 0.6; /* 60% opacity */
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #headers a {
+            color: rgb(5, 4, 4);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        #headers a:hover {
+            text-decoration: underline;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe8d6;
+            padding-top: 60px;
+            margin: 0;
+        }
+        #container {
+            background-color: #ffe8d6;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 20px auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .toggle {
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .toggle:hover {
+            text-decoration: underline;
+        }
+
+        /* Section Styles */
+        section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .counter-container {
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .counter {
+            font-size: 80px;
+            font-weight: bold;
+            color: #3a86ff;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+        .counter.animate {
+            color: #8338ec;
+        }
+        #contact {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 40vh;
+            background-color: white;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            
+        }
+        #contactbtn{
+            height: 15px;
+            width: 90px;
+            padding: 20px;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div id="headers">
+        <div>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#contact" class="nav-link">Contact Us</a>
+            <a href = "#container" class = "nav-link">Home</a>
+        </div>
+    </div>
+
+    <!-- Login/Signup Form -->
+    <div  id="container">
+        <h2 id="form-title">Sign Up</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="submit-btn" onclick="handleSubmit()">Sign Up</button>
+        <div class="toggle" onclick="toggleForm()">Already have an account? Login</div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>CoBuy is a pioneering platform that facilitates collaborative purchasing across major cloud services like AWS and Google Cloud...</p>
+        <div class="counter-container">
+            <div class="counter" data-target="1000">0</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need assistance, feel free to contact us.</p>
+        <p>&copy; 2025 CoBuy. All rights reserved.</p>
+        <button onclick="redirectToPage()" id="contact-btn">Contact</button>
+    </div>
+    
+    <script>
+          function redirectToPage() {
+        window.location.href = "file:///D:/cobuy/templates/contactform.html"; // Replace with the path to your contact form page
+    }
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1); // Remove '#' to get the ID
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+          
+        // Toggle between Login and Signup
+        let isLoginMode = false;
+        function toggleForm() {
+            const title = document.getElementById('form-title');
+            const button = document.getElementById('submit-btn');
+            const toggleText = document.querySelector('.toggle');
+            isLoginMode = !isLoginMode;
+            if (isLoginMode) {
+                title.textContent = "Login";
+                button.textContent = "Login";
+                toggleText.textContent = "Don't have an account? Sign Up";
+            } else {
+                title.textContent = "Sign Up";
+                button.textContent = "Sign Up";
+                toggleText.textContent = "Already have an account? Login";
+            }
+        }
+        function redirectToPage() {
+        window.location.href = "/contact"; 
+    }
+
+        // Handle Form Submission
+        async function handleSubmit() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            if (!username || !password) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            const endpoint = isLoginMode ? '/login' : '/signup';
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const result = await response.json();
+            if (result.status === 'success') {
+                if (isLoginMode) {
+                    window.location.href = result.redirect;
+                } else {
+                    alert(result.message);
+                }
+            } else {
+                alert(result.message);
+            }
+        }
+
+        // Counter Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const animateCounter = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const current = +counter.innerText;
+                    const increment = target / 200;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + increment);
+                        requestAnimationFrame(animateCounter);
+                    } else {
+                        counter.innerText = target;
+                        counter.classList.add('animate');
+                    }
+                };
+                animateCounter();
+            });
+        });
+    </script>
+
+</body>
+</html>
