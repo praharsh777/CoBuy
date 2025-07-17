@@ -23,9 +23,7 @@ _Add screenshots here showing matching interface, homepage, subscription matchin
 ## 📂 Folder Structure
 
 cobuy/
-├── static/
-│ ├── css/
-│ └── images/
+│── images/
 ├── templates/
 │ ├── index.html
 │ ├── match.html
