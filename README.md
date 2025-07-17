@@ -22,19 +22,18 @@ _Add screenshots here showing matching interface, homepage, subscription matchin
 
 ## 📂 Folder Structure
 
-cobuy/
-│── images/
-├── templates/
-│ ├── index.html
-│ ├── match.html
-│ └── subscribe.html
-├── app.py
-├── requirements.txt
-└── README.md
+CoBuy/
+├── __pycache__/               # Python bytecode cache (can be ignored in Git)
+├── templates/                 # HTML templates for Flask
+│   └── (your HTML files)      
+├── app.py                     # Main Flask application
+├── requirements.txt           # Python dependencies (just `Flask`)
+├── script.js                  # Frontend JavaScript logic
+├── style.css                  # Custom CSS styles
+├── user_interest.csv          # Data file for user interests
+├── users.csv                  # Data file for user info
+└── README.md                  # Project documentation
 
-bash
-Copy
-Edit
 
 ## 🔧 Installation
 
@@ -44,22 +43,14 @@ Edit
    cd cobuy
 Create virtual environment and activate
 
-bash
-Copy
-Edit
+
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 Install dependencies
 
-bash
-Copy
-Edit
 pip install -r requirements.txt
 Run the app
 
-bash
-Copy
-Edit
 flask run
 Visit the app
 Open http://127.0.0.1:5000 in your browser.
